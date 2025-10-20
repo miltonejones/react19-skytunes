@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-19skytunes-dev-120f9-authRole",
+      "UnauthRoleArn": "arn:aws:iam::123823813021:role/amplify-19skytunes-dev-120f9-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::123823813021:role/amplify-19skytunes-dev-120f9-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-19skytunes-dev-120f9-deployment",
+      "UnauthRoleName": "amplify-19skytunes-dev-120f9-unauthRole",
+      "StackName": "amplify-19skytunes-dev-120f9",
+      "StackId": "arn:aws:cloudformation:us-east-1:123823813021:stack/amplify-19skytunes-dev-120f9/3871c600-acaf-11f0-8dea-124246a4e173",
+      "AmplifyAppId": "df4ryype6bcxm"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "df4ryype6bcxm",
+          "type": "manual"
+        }
+      }
+    }
+  }
+}

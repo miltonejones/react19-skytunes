@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+.workspace {
+  height: calc(100vh - 60px);
+  overflow: scroll;
+  transition: height 0.3s ease;
+}
+
+.workspace.playing {
+  height: calc(100vh - 180px);
+}
+
+div.link {
+  cursor: pointer;
+}
+
+div.link:hover {
+  text-decoration: underline;
+}
+
+.row-6 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 0.25rem;
+  margin: 1rem;
+}
+
+.row-4 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 0.25rem;
+  margin: 1rem;
+}
+
+.row-6.small {
+  grid-template-columns: 1fr 1fr;
+  width: 30vw;
+}
+
+svg {
+  display: none;
+  cursor: pointer;
+}
+
+.logo-dt {
+  display: inline;
+  width: 32px;
+  height: 32px;
+  margin-right: 0.5rem;
+}
+
+.logo-dt.phone {
+  display: none;
+  width: 24px;
+  height: 24px;
+  margin-left: 0.5rem;
+}
+.banner {
+  background-color: #f8f9fa;
+  font-weight: bold;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.banner-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+@media (max-width: 768px) {
+  .logo-dt {
+    display: none;
+  }
+  .logo-dt.phone {
+    display: inline;
+  }
+
+  svg {
+    display: inline;
+  }
+
+  .row-6 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem;
+    margin: 1rem;
+  }
+  .row-4 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+    margin: 1rem;
+  }
+  .row-6.small {
+    width: 90vw;
+  }
+
+  .mobile-off {
+    display: none;
+  }
+
+  .workspace {
+    height: calc(100vh - 130px);
+  }
+
+  /* .workspace.playing {
+    height: calc(100vh - 200px);
+  } */
+}
+
+/* Add to your App.css */
+.audio-player {
+  z-index: 900;
+}
+
+.audio-player.disabled {
+  opacity: 0.7;
+}
+
+.main-content {
+  min-height: calc(100vh - 80px);
+}
+
+/* Custom range input styling */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-track {
+  background: #e5e7eb;
+  height: 8px;
+  border-radius: 4px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  background: #3b82f6;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-track {
+  background: #e5e7eb;
+  height: 8px;
+  border-radius: 4px;
+  border: none;
+}
+
+input[type="range"]::-moz-range-thumb {
+  background: #3b82f6;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}

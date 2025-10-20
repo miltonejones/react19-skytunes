@@ -1,0 +1,62 @@
+.track-row.small .track-detail {
+  display: none;
+}
+.track-row .track-caption {
+  display: none;
+}
+.track-row.small .track-caption {
+  display: flex;
+  flex-direction: row;
+  font-size: 0.9rem;
+  padding-left: 0.25rem;
+}
+
+.track-row .info {
+  width: 40px;
+}
+
+table.small {
+  width: 30vw;
+}
+
+@media (max-width: 768px) {
+  .track-row .track-caption {
+    display: flex;
+    flex-direction: row;
+    font-size: 0.9rem;
+    padding-left: 0.25rem;
+    white-space: nowrap;
+  }
+
+  .track-row .track-caption div {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 150px;
+  }
+  .track-row .track-detail {
+    display: none;
+  }
+}
+.disc-header {
+  background-color: #f8f9fa;
+  font-weight: bold;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.disc-header td {
+  padding: 8px 12px;
+  font-size: 1.1em;
+}
+/* Add to TrackList.css */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.playing-animation {
+  animation: rotate 2s linear infinite;
+}
