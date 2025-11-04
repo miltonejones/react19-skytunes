@@ -1,0 +1,16 @@
+.toast {
+  width: 300px;
+  border: solid 1px #ccc;
+  background-color: aquamarine;
+  color: darkgreen;
+
+  position: absolute;
+  left: 1rem;
+  top: -200px;
+  transition: top 0.5s ease-in-out;
+  padding: 1rem;
+}
+
+.toast.active {
+  top: 1rem;
+}

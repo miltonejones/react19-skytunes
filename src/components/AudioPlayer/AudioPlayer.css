@@ -1,0 +1,25 @@
+.audio-outer {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 1rem;
+}
+
+.audio-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rounded-full {
+  border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+  .audio-outer {
+    grid-template-columns: 3fr 1fr;
+  }
+  .audio-label {
+    display: none;
+  }
+}

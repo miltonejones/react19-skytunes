@@ -5,7 +5,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import TrackList from "../TrackList/TrackList";
 import useArtistBanner from "../ArtistBanner/useArtistBanner";
 
-const ArtistDetail = ({ onSongSelect, currentSongId }) => {
+const ArtistDetail = ({ onSongSelect, currentSongId, onSongInsert }) => {
   const { id } = useParams();
 
   const { data, refetch } = useSuspenseQuery({
@@ -24,6 +24,7 @@ const ArtistDetail = ({ onSongSelect, currentSongId }) => {
       count={data.related.count}
       handlePageChange={handlePageChange}
       onSongSelect={onSongSelect}
+      onSongInsert={onSongInsert}
       page={1}
       onUpdate={refetch}
       {...bannerProps}

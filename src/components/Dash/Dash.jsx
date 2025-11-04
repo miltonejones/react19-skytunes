@@ -28,7 +28,7 @@ function Message({ messagePromise, messageType, bannerProps, setBannerProps }) {
           item.Type === "artist" && item.imageLg && item.imageLg !== "no image"
       )
       .sort(() => Math.random() - 0.5)
-      .slice(0, 25); // Shuffle for variety
+      .slice(0, 15); // Shuffle for variety
 
     if (artistsWithImages.length > 0) {
       setBannerProps &&
@@ -86,13 +86,15 @@ function PlaylistDash({ messagePromise }) {
       <div className="row-4">
         {items.map((datum) => (
           <HorizCard
+            half
             key={datum.ID}
             src={datum.image}
             title={datum.Title}
             caption={datum.TrackCount + " Tracks"}
             onCardClick={() =>
               handleClick(
-                datum.listKey || datum.Title.replace(/\s+/g, "").toLowerCase()
+                datum.listKey ||
+                  datum.Title.replace(/[\s\&\-]/g, "").toLowerCase()
               )
             }
           />
@@ -113,13 +115,13 @@ export default function Dash() {
       {bannerProps.artists && <ArtistCarousel {...bannerProps} />}
 
       <Suspense fallback={<Spinner />}>
-        <Banner title="Featured Playlists" />
+        <Banner title="Featured Playlists" link="/playlist" icon="📜" />
         <PlaylistDash messagePromise={playlistPromise} />
       </Suspense>
       <Suspense fallback={<Spinner />}>
-        <Banner title="Featured Albums" />
+        <Banner title="Featured Albums" link="/album" icon="📀" />
         <Message messagePromise={messagePromise} messageType="album" />
-        <Banner title="Featured Artists" />
+        <Banner title="Featured Artists" link="/artist" icon="🤺" />
         <Message
           messagePromise={messagePromise}
           messageType="artist"

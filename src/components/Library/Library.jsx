@@ -58,7 +58,7 @@ function useLibrary(rowData) {
   };
 }
 
-export default function Library({ onSongSelect, currentSongId }) {
+export default function Library({ onSongSelect, currentSongId, onSongInsert }) {
   const navigate = useNavigate();
   const { page } = useParams();
 
@@ -89,10 +89,13 @@ export default function Library({ onSongSelect, currentSongId }) {
 
       <TrackList
         currentSongId={currentSongId}
-        records={data.records}
+        records={data.records?.filter(
+          (record) => record.Title.toLowerCase().indexOf("json") < 0
+        )}
         count={data.count}
         handlePageChange={handlePageChange}
         onSongSelect={onSongSelect}
+        onSongInsert={onSongInsert}
         page={page || 1}
         onUpdate={refetch}
       />

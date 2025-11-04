@@ -26,7 +26,7 @@ const GenreGrid = () => {
         page={page}
         count={data.count}
         handlePageChange={handlePageChange}
-        items={data.records}
+        items={data.records.filter((rec) => rec.TrackCount > 0)}
         handleClick={handleClick}
       />
     </div>

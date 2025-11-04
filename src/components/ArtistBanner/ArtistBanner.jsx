@@ -1,6 +1,8 @@
 import React from "react";
 import "./ArtistBanner.css";
 import { useNavigate } from "react-router-dom";
+import Logo from "../Logo/Logo";
+import { fallbackImage } from "../../fallbackImage";
 
 const ArtistBanner = ({
   artistItem,
@@ -15,7 +17,11 @@ const ArtistBanner = ({
   };
   return (
     <div class="artist-outer">
-      <img src={artistItem?.imageLg} alt={artistItem?.Name} />
+      <Logo
+        fallback={fallbackImage}
+        src={artistItem?.imageLg}
+        alt={artistItem?.Name}
+      />
 
       <div class="info-box">
         <div class="info-label">{labelName}</div>

@@ -56,28 +56,40 @@ svg {
 
 .logo-dt.phone {
   display: none;
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   margin-left: 0.5rem;
 }
 .banner {
-  background-color: #f8f9fa;
+  /* background-color: #f8f9fa; */
+  padding-top: 0.5rem;
   font-weight: bold;
-  border-bottom: 2px solid #dee2e6;
+  /* border-bottom: 2px solid #dee2e6; */
 }
 
 .banner-title {
   margin: 0;
   font-size: 1.2rem;
   font-weight: bold;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  /* text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); */
 }
 @media (max-width: 768px) {
   .logo-dt {
-    display: none;
+    width: 24px;
+    height: 24px;
+    margin-left: 0.5rem;
+    margin-right: 0.25rem;
   }
-  .logo-dt.phone {
+
+  .horiz-w {
+    max-width: calc(50vw - 1rem);
+  }
+  /* .logo-dt.phone {
     display: inline;
+  } */
+
+  .hide-mb {
+    display: none;
   }
 
   svg {
@@ -92,7 +104,7 @@ svg {
   }
   .row-4 {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 0.25rem;
     margin: 1rem;
   }
@@ -113,9 +125,17 @@ svg {
   } */
 }
 
-/* Add to your App.css */
+/* Add to your App.css fixed bottom-0 left-0 right-0*/
 .audio-player {
   z-index: 900;
+  position: fixed;
+  bottom: -200px;
+  left: 0;
+  right: 0;
+  transition: bottom 0.2s linear;
+}
+.audio-player.playing {
+  bottom: 0;
 }
 
 .audio-player.disabled {

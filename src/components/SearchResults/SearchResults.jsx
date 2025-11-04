@@ -7,7 +7,7 @@ import TrackGrid from "../TrackGrid/TrackGrid";
 import "./SearchResults.css";
 import Banner from "../Banner/Banner";
 
-const SearchResults = ({ currentSongId, onSongSelect }) => {
+const SearchResults = ({ currentSongId, onSongSelect, onSongInsert }) => {
   const navigate = useNavigate();
   const { param } = useParams();
   const [one, two, three] = useQueries({
@@ -41,6 +41,7 @@ const SearchResults = ({ currentSongId, onSongSelect }) => {
             records={one.data.records}
             count={one.data.count}
             onSongSelect={onSongSelect}
+            onSongInsert={onSongInsert}
             page={1}
             css="small"
           />

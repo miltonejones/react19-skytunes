@@ -7,6 +7,9 @@ import Drawer from "../Drawer/Drawer";
 import { useState } from "react";
 import TrackEdit from "../TrackEdit/TrackEdit";
 import ArtistBanner from "../ArtistBanner/ArtistBanner";
+import ToastButton from "../ToastButton/ToastButton";
+import TrackMenu from "../TrackMenu/TrackMenu";
+import HorizCard from "../HorizCard/HorizCard";
 
 function formatTime(seconds) {
   if (!seconds || seconds < 0) {
@@ -14,7 +17,7 @@ function formatTime(seconds) {
   }
 
   const minutes = Math.floor(seconds / 1000 / 60);
-  const remainingSeconds = Math.floor(seconds % 60);
+  const remainingSeconds = Math.floor((seconds / 1000) % 60);
 
   return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
 }
@@ -37,10 +40,13 @@ export default function TrackList({
   titleName,
   trackCount,
   artistItem,
+  setPhoto,
+  onSongInsert,
 }) {
   const [draggedItem, setDraggedItem] = useState(null);
   const [dragOverIndex, setDragOverIndex] = useState(null);
   const [selectedTrack, setSelectedTrack] = useState(null);
+  const [editedTrack, setEditedTrack] = useState(null);
 
   const trackComplete = () => {
     setSelectedTrack(null);
@@ -168,12 +174,13 @@ export default function TrackList({
                         style={{
                           w: 32,
                           height: 32,
+                          aspectRatio: "1 / 1",
                           borderRadius: "50%",
                         }}
                       />
                     </td>
                     <td>
-                      <div className="flex truncate whitespace-nowrap max-w-2xs p-1">
+                      <div className="flex truncate whitespace-nowrap p-1">
                         <div
                           className="track-caption"
                           onClick={() => playlistLib.openDrawer(song)}
@@ -182,14 +189,30 @@ export default function TrackList({
                         </div>
                         {showTrackNumbers && <span>{song.trackNumber}.</span>}{" "}
                         <div
-                          className="link"
+                          className="link truncate whitespace-nowrap max-w-2xs"
                           onClick={() => onSongSelect(song, records)}
                         >
                           {song.Title}
                         </div>
+                        <div className="spacer"></div>
+                        {/* <ToastButton
+                          onClick={() => onSongInsert(song)}
+                          className="link track-caption"
+                          icon="➕"
+                          toastIcon="✔️"
+                        >
+                          {song.Title} added to queue
+                        </ToastButton> */}
+                        <a
+                          onClick={() => setEditedTrack(song)}
+                          className="link track-caption pr-2"
+                        >
+                          {" "}
+                          ☰
+                        </a>
                       </div>
 
-                      <div className="track-caption">
+                      <div className="track-caption detail">
                         <div
                           className="link"
                           onClick={() =>
@@ -252,8 +275,33 @@ export default function TrackList({
                     )}
 
                     <td className="track-detail icon">
-                      <a onClick={() => setSelectedTrack(song)}> ✏️</a>
+                      <a onClick={() => setEditedTrack(song)}> ☰</a>
                     </td>
+
+                    {/* {setPhoto && (
+                      <td className="track-detail icon">
+                        <ToastButton
+                          onClick={() => setPhoto(song)}
+                          className="link"
+                          icon="🖼"
+                          toastIcon="✔️"
+                        >
+                          Playlist thumbnail updated to "{song.Title}"
+                        </ToastButton>
+ 
+                      </td>
+                    )} */}
+
+                    {/* <td className="track-detail">
+                      <ToastButton
+                        onClick={() => onSongInsert(song)}
+                        className="link"
+                        icon="➕"
+                        toastIcon="✔️"
+                      >
+                        {song.Title} added to queue
+                      </ToastButton>
+                    </td> */}
                   </tr>
                 );
               })}
@@ -272,28 +320,64 @@ export default function TrackList({
           onComplete={() => trackComplete()}
         />
       </Drawer>
+
+      <Drawer
+        right
+        title="Track menu"
+        drawerOpen={!!editedTrack}
+        onDrawerToggle={() => setEditedTrack(null)}
+      >
+        <TrackMenu
+          openPlaylist={(song) => playlistLib.openDrawer(song)}
+          editTrack={(song) => setSelectedTrack(song)}
+          addToQueue={(song) => onSongInsert(song)}
+          onDrawerToggle={() => setEditedTrack(null)}
+          setPhoto={setPhoto}
+          track={editedTrack}
+        />
+      </Drawer>
+
       <Drawer
         title="Set playlist"
         drawerOpen={playlistLib.drawerOpen}
         onDrawerToggle={() => playlistLib.setDrawerOpen(false)}
       >
-        <div className="p-4">
-          {playlistLib.currentTrack?.Title}
-          {playlistLib.listItems.map((track) => (
+        <>
+          <HorizCard
+            title={playlistLib.currentTrack?.Title}
+            src={playlistLib.currentTrack?.albumImage}
+            caption={playlistLib.currentTrack?.artistName}
+            subcaption={playlistLib.currentTrack?.albumName}
+          />
+          <div className="p-4">
+            {/* {playlistLib.currentTrack?.Title} */}
+            {playlistLib.listItems
+              .sort((a, b) => a.Title.localeCompare(b.Title))
+              .map((track) => (
+                <div
+                  key={track.ID}
+                  onClick={() => playlistLib.updateList(track)}
+                  className="flex justify-between mb-2 pb-1 border-b border-gray-300 cursor-pointer"
+                >
+                  <div className="font-semibold">{track.Title}</div>
+                  <div>
+                    {" "}
+                    {playlistLib.matchList(track, playlistLib.currentTrack)
+                      ? "❤️"
+                      : "🖤"}
+                  </div>
+                </div>
+              ))}
+
             <div
-              key={track.ID}
+              onClick={() => playlistLib.createList()}
               className="flex justify-between mb-2 pb-1 border-b border-gray-300 cursor-pointer"
             >
-              <div className="font-semibold">{track.Title}</div>
-              <div onClick={() => playlistLib.updateList(track)}>
-                {" "}
-                {playlistLib.matchList(track, playlistLib.currentTrack)
-                  ? "❤️"
-                  : "🖤"}
-              </div>
+              <div className="font-semibold">Create New Playlist</div>
+              <div>➕</div>
             </div>
-          ))}
-        </div>
+          </div>
+        </>
       </Drawer>
     </>
   );

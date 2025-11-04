@@ -3,9 +3,14 @@ const dotless = (str) => str?.replace(/\./g, "");
 export async function announceChange(
   artist,
   title,
+  ms,
+  chatType,
   onSpeechStart = null,
   onSpeechEnd = null
 ) {
+  if (ms < 150000) {
+    return onSpeechEnd();
+  }
   const requestOptions = {
     method: "POST",
     body: JSON.stringify({
@@ -13,9 +18,8 @@ export async function announceChange(
       title: dotless(title),
     }),
   };
-
   const response = await fetch(
-    "https://ismvqzlyrf.execute-api.us-east-1.amazonaws.com/announce",
+    "https://ismvqzlyrf.execute-api.us-east-1.amazonaws.com/" + chatType,
     requestOptions
   );
 

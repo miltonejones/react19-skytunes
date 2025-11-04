@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./ArtistCarousel.css";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../Spinner/Spinner";
+import Logo from "../Logo/Logo";
+import { fallbackImage } from "../../fallbackImage";
 
 const ArtistCarousel = ({ artists }) => {
   const navigate = useNavigate();
@@ -74,7 +76,8 @@ const ArtistCarousel = ({ artists }) => {
       <div className={`carousel-container ${direction}`}>
         {/* Previous slide - only visible during prev transition */}
         {direction === "prev" && (
-          <img
+          <Logo
+            fallback={fallbackImage}
             key={`prev-${prevArtist.ID}`}
             src={prevArtist.imageLg}
             alt={prevArtist.Name}
@@ -83,7 +86,8 @@ const ArtistCarousel = ({ artists }) => {
         )}
 
         {/* Current active slide */}
-        <img
+        <Logo
+          fallback={fallbackImage}
           key={`active-${currentArtist.ID}`}
           src={currentArtist.imageLg}
           alt={currentArtist.Name}
@@ -92,7 +96,8 @@ const ArtistCarousel = ({ artists }) => {
 
         {/* Next slide - only visible during next transition */}
         {direction === "next" && (
-          <img
+          <Logo
+            fallback={fallbackImage}
             key={`next-${nextArtist.ID}`}
             src={nextArtist.imageLg}
             alt={nextArtist.Name}

@@ -35,13 +35,13 @@ export default function Card({
         />
       </div>
 
-      <div className="p-4">
-        <h3 className="truncate text-base font-semibold text-gray-900 dark:text-gray-100">
+      <div className="pl-2">
+        <div className="truncate text-base  text-gray-900 dark:text-gray-100">
           {title}
-        </h3>
-        <p className="truncate mt-1 text-sm text-gray-600 dark:text-gray-300">
+        </div>
+        <div className="truncate mb-1 text-xs text-gray-600 dark:text-gray-300">
           {caption}
-        </p>
+        </div>
       </div>
     </button>
   );

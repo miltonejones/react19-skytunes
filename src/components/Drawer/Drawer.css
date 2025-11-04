@@ -6,11 +6,26 @@
   width: 400px;
   background-color: white;
   height: 100vh;
-  transition: left 0.2s ease-out;
+  transition: all 0.2s ease-out;
   overflow: auto;
 }
-.drawer.open {
+
+.drawer.right {
+  right: -400px;
+}
+
+.drawer.right.open {
+  right: 0;
+  left: auto;
+}
+
+.drawer.left.open {
   left: 0;
+}
+
+.drawer-title {
+  padding-left: 1rem;
+  font-weight: 600;
 }
 .drawer.open.wide {
   width: 95vw;

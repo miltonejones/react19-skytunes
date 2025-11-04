@@ -16,12 +16,12 @@ function NavBar() {
   };
   // Define your navigation links
   const navItems = [
-    { name: "Home", path: "/" },
-    { name: "Library", path: "/library" },
-    { name: "Artists", path: "/artist" },
-    { name: "Albums", path: "/album" },
-    { name: "Genres", path: "/genre" },
-    { name: "Playlists", path: "/playlist" },
+    { name: "Home", path: "/", icon: "🏠" },
+    { name: "Library", path: "/library", icon: "📚" },
+    { name: "Artists", path: "/artist", icon: "🤺" },
+    { name: "Albums", path: "/album", icon: "📀" },
+    { name: "Genres", path: "/genre", icon: "🏷" },
+    { name: "Playlists", path: "/playlist", icon: "📜" },
   ];
 
   // Check if a link is active
@@ -46,7 +46,7 @@ function NavBar() {
   // Search handler with debounce
   const handleSearch = useCallback(
     debounce((value) => {
-      if (value.trim()) {
+      if (value.trim() && value.length >= 3) {
         navigate(`/search/${encodeURIComponent(value)}`);
       }
     }, 300),
@@ -110,7 +110,7 @@ function NavBar() {
           <div className="flex-1 max-w-md mx-4">
             <input
               type="text"
-              placeholder="Search..."
+              placeholder="🎵 Search..."
               value={searchValue}
               onChange={handleInputChange}
               className="w-full px-4 py-2 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-gray-600 transition duration-150 ease-in-out"
@@ -129,7 +129,7 @@ function NavBar() {
                     : "text-gray-300"
                 } hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out`}
               >
-                {item.name}
+                {item.icon} {item.name}
               </Link>
             ))}
           </div>
@@ -151,7 +151,7 @@ function NavBar() {
               }`}
             >
               <Link to={item.path} onClick={handleDrawerToggle}>
-                {item.name}
+                {item.icon} {item.name}
               </Link>
             </li>
           ))}

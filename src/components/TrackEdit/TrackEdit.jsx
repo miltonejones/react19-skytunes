@@ -170,7 +170,7 @@ const TrackEdit = ({ trackItem, onComplete }) => {
                     htmlFor="Title"
                     className="block text-sm font-medium text-gray-700 mb-1"
                   >
-                    Title
+                    Title [{trackItem?.ID}]
                   </label>
                   <input
                     type="text"

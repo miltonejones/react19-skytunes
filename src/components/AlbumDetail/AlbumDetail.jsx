@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-import { getAlbumDetail, getArtistDetail } from "../../connector";
+import React from "react";
+import { getAlbumDetail } from "../../connector";
 import { useParams } from "react-router-dom";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import TrackList from "../TrackList/TrackList";
 import useArtistBanner from "../ArtistBanner/useArtistBanner";
 
-const AlbumDetail = ({ onSongSelect, currentSongId }) => {
+const AlbumDetail = ({ onSongSelect, currentSongId, onSongInsert }) => {
   const { id } = useParams();
   const { data, refetch } = useSuspenseQuery({
     queryKey: ["album", id],
@@ -23,6 +23,7 @@ const AlbumDetail = ({ onSongSelect, currentSongId }) => {
       count={data.related.count}
       handlePageChange={handlePageChange}
       onSongSelect={onSongSelect}
+      onSongInsert={onSongInsert}
       showTrackNumbers={true}
       page={1}
       groupByDisc={true}

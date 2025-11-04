@@ -2,11 +2,14 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { getPlaylistGrid, savePlaylist } from "./connector";
 import { useEffect, useState } from "react";
 
+const createKey = (name) => name.replace(/[\s&-]/g, "").toLowerCase();
+
 export default function usePlaylist() {
   const [currentTrack, setCurrentTrack] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [related, setRelated] = useState([]);
   const [listItems, setListItems] = useState([]);
+
   const extractRelated = (data) => {
     const relatedPlaylists = [];
     if (!data || !data.records) return relatedPlaylists;
@@ -42,6 +45,21 @@ export default function usePlaylist() {
     return list.related && list.related.includes(track?.FileKey) ? true : false;
   };
 
+  const createList = async () => {
+    const listname = prompt("Enter new playlist name:");
+    if (!listname) return;
+
+    const playlist = {
+      Title: listname,
+      listKey: createKey(listname),
+      image: currentTrack.albumImage,
+      related: [currentTrack.FileKey],
+    };
+    await savePlaylist(playlist);
+    refetch();
+    setDrawerOpen(false);
+  };
+
   const updateList = async (playlist) => {
     const { related } = playlist;
     const updated = {
@@ -71,5 +89,6 @@ export default function usePlaylist() {
     currentTrack,
     matchList,
     updateList,
+    createList,
   };
 }

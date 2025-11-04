@@ -26,6 +26,11 @@ table.small {
     font-size: 0.9rem;
     padding-left: 0.25rem;
     white-space: nowrap;
+    color: #555;
+  }
+
+  .track-row .track-caption.detail {
+    padding-left: 1.75rem;
   }
 
   .track-row .track-caption div {
@@ -47,7 +52,7 @@ table.small {
   padding: 8px 12px;
   font-size: 1.1em;
 }
-/* Add to TrackList.css */
+
 @keyframes rotate {
   from {
     transform: rotate(0deg);
