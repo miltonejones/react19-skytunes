@@ -78,6 +78,11 @@ const TrackEdit = ({ trackItem, onComplete }) => {
       albumFk: albumData,
     };
 
+    console.log({
+      artistName,
+      albumImage,
+      albumData,
+    });
     await getArtist(itunes, updatedTrack);
   };
 
@@ -89,6 +94,12 @@ const TrackEdit = ({ trackItem, onComplete }) => {
       artistName,
       albumImage
     );
+
+    console.log({
+      artistName,
+      albumImage,
+      artistData,
+    });
 
     const updatedTrack = {
       ...track,

@@ -37,7 +37,9 @@ const PlaylistGrid = () => {
             ...rec,
             ID: rec.listKey || createKey(rec.Title),
           }))
-          .sort((a, b) => a.Title.localeCompare(b.Title))}
+          .sort((a, b) =>
+            a.Title.toLowerCase().localeCompare(b.Title.toLowerCase())
+          )}
         handleClick={handleClick}
       />
     </Suspense>
